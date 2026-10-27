@@ -221,7 +221,10 @@ class AudioOptions(QObject):
             return get_audio("hello", source, {source: region}, fallback=False)
 
         def done(future):
-            self.test_btn.setEnabled(True)
+            try:
+                self.test_btn.setEnabled(True)
+            except RuntimeError:  # The hub was closed during the request.
+                return
             try:
                 audio, problems = future.result()
             except Exception as e:  # noqa: BLE001
