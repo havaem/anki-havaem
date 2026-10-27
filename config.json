@@ -1,6 +1,25 @@
 {
-    "gemini_api_key": "example",
+    "gemini_api_key": "",
     "gemini_model": "gemini-2.5-flash",
-    "last_deck": "example",
-    "last_note_type": "example"
+    "translation_language": "Vietnamese",
+    "workers": 3,
+
+    "enrich_source": "cambridge",
+    "create_source": "gemini",
+    "gemini_fill_gaps": true,
+
+    "audio_source": "cambridge",
+    "cambridge_region": "us",
+    "google_region": "us",
+    "audio_fallback": true,
+
+    "skip_duplicates": true,
+    "new_note_tag": "havaem",
+    "overwrite": false,
+
+    "auto_backup_addons": false,
+
+    "last_deck": "",
+    "last_note_type": "",
+    "mappings": {}
 }
