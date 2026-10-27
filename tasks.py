@@ -259,7 +259,15 @@ def start_create(parent, deck_name, notetype_name, mapping, mode, text, source, 
             if need:
                 values, problems = gather(word, need, source, opts)
                 fields.update({mapping[k]: v for k, v in values.items()})
-            call_on_main(lambda: _add_note(notetype, deck_id, fields, tags))
+            def add_if_new():
+                identity = {field: field for field in fields}
+                if skip_dups and _is_duplicate(notetype, identity, fields):
+                    return False
+                _add_note(notetype, deck_id, fields, tags)
+                return True
+
+            if not call_on_main(add_if_new):
+                return "skip", f"'{word}': already exists"
             return "ok", f"'{word}': created{_short_problems(problems)}"
 
     return run_job(
