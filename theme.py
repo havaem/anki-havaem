@@ -262,6 +262,8 @@ class Row(QWidget):
             text.addWidget(sub)
         lay.addLayout(text, 0 if expand else 1)
         if control is not None:
+            if isinstance(control, Switch):
+                control.setAccessibleName(label)
             if expand:
                 lay.addWidget(control, 1)
             else:
