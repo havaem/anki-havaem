@@ -1,34 +1,42 @@
-### **HAVAEM Tool Hub (Smart Word Creator & Field Auto-Filler)**
+### **HAVAEM Tool Hub**
 
-Transform your Anki workflow with the **HAVAEM Tool Hub**, an all-in-one centralized add-on designed to make language learning and card creation faster, smarter, and incredibly efficient. Whether you want to generate comprehensive flashcards from scratch using AI or automatically fill in missing data on your existing cards, this add-on has you covered.
+One hub (**Tools ▸ HAVAEM Tool Hub**) for building and maintaining vocabulary decks: create cards from a word list, fill the gaps in existing cards, pick your pronunciation source, and back up your add-ons.
 
-#### ✨ **Key Features**
+#### ✨ Features
 
-**1. Smart Word Creator (AI-Powered Card Generation)**
-Tired of manually looking up IPA, definitions, example sentences, and mnemonics? The Smart Word Creator uses Google's Gemini AI to instantly generate complete, high-quality language data for a list of words.
-* **Auto-Generate via Gemini**: Simply paste a list of words (one per line). The add-on will automatically generate: *Word, IPA, Part of Speech, Meaning, Example Sentence, Translated Sentence (Vietnamese), Synonyms, and a memorable Mnemonic*.
-* **Custom Field Mapping**: Seamlessly map the AI-generated data to the specific fields of any of your Anki Note Types.
-* **Import Custom Data**: Prefer bringing your own data? You can easily import TSV or pipe-separated (`|`) lists to rapidly create cards in bulk.
+**1. Smart Word Creator**
+* Paste words (one per line) and get finished cards: IPA, part of speech, meaning, example sentence, translation, synonyms, mnemonic, audio and an image.
+* Text source: **Cambridge Dictionary**, **Free Dictionary API** or **Gemini AI**. Optionally let Gemini fill whatever the dictionary can't provide.
+* Or import your own data (TSV or `|` separated) and let the add-on fetch just the audio / image.
+* Skips words you already have, tags new notes, and remembers your field mapping per note type.
 
-**2. Add Missing Fields (Bulk Auto-Filler)**
-Got a massive deck of cards missing definitions or parts of speech? Let HAVAEM fill them in automatically.
-* **Multiple Data Sources**: Choose between the *Free Dictionary API*, *Cambridge Dictionary*, or *Gemini AI*.
-* **Smart Processing**: Select your deck, the source "Word" field, and the target fields for Meaning and Part of Speech. The add-on will scan your deck and bulk-update the missing information.
-* **Safe Overwrite Options**: Choose to only fill empty fields to preserve your custom notes, or toggle overwrite to completely refresh your existing values.
-* **Background Processing**: Runs smoothly in the background with a detailed progress dialog. You can pause, monitor the log, or cancel the process at any time.
+**2. Add Missing Fields**
+* Choose a deck (subdecks included) plus an optional search filter, then fill empty IPA / POS / meaning / example / translation / synonyms / mnemonic / audio / image fields.
+* **Check what's missing** first — counts the notes that need data without making any request.
+* Existing content is preserved unless you tick *Overwrite*.
 
-**3. Clean & User-Friendly Interface**
-* **Modern Sidebar UI**: A clean, resizable hub interface that keeps all tools organized and accessible in one place.
-* **Customizable AI Models**: Supports various Gemini models (including `gemini-2.5-flash`, `gemini-2.5-pro`, and `gemini-3-pro`). Just plug in your free Gemini API key!
-* **Smart Memory**: Automatically saves your last used decks, note types, and UI preferences to save you clicks on your next session.
+**3. Audio sources**
+* **Cambridge Dictionary** — US or UK.
+* **Google Translate** — US, UK, Australian or Indian English.
+* One-click **Test** button, and an optional automatic fallback to the other source when a word has no audio.
 
-#### 🚀 **How to Get Started**
-1. Open Anki and navigate to **Tools > HAVAEM Tool Hub** from the top menu bar.
-2. Go to the **Settings** tab and enter your Gemini API key *(Required for the Smart Word Creator and Gemini dictionary features. You can get one for free from Google AI Studio)*.
-3. **To generate new cards**: Go to the *Smart Word Creator* tab, select your target deck and note type, map your fields, paste your vocabulary list, and click "Start Creating".
-4. **To update existing cards**: Go to the *Add Missing Fields* tab, configure your source/target fields, choose your dictionary API, and click "Start Processing".
+**4. Add-on Backup**
+* **Export** the list of installed add-ons (install codes, version, enabled state and settings) to a JSON file.
+* **Import** it on any machine: missing add-ons are downloaded from AnkiWeb, then their settings and enabled state are restored. Add-ons installed from files have no install code and are listed for manual reinstall.
+* Optional automatic daily backup (last 10 kept). HAVAEM's own Gemini key is never exported.
 
-***
+**5. Reliable processing**
+* Parallel requests with automatic retry/back-off on rate limits, pause / cancel, live progress with ETA, and an honest log: a note only counts as done once Anki has saved it.
+* Settings are stored in Anki's add-on config, so they survive updates.
+
+#### 🚀 Getting started
+1. Open **Tools ▸ HAVAEM Tool Hub**.
+2. *(Optional)* In **Settings**, add a free [Gemini API key](https://aistudio.google.com/app/apikey) and press **Test connection**.
+3. Pick **Smart Word Creator** or **Add Missing Fields**, choose the deck / note type, check the field mapping (it is guessed from the field names), and start.
+
+#### Notes
+* Requires Anki 2.1.50 or newer.
+* Cambridge and Google are queried like a browser would; if a site changes its layout or blocks requests, use the audio fallback or switch source.
 
 ### **Support & Feedback**
 Feel free to reach out with any issues, feature requests, or general feedback.
