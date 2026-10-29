@@ -28,17 +28,36 @@ def style_primary(button: QPushButton) -> None:
     button.setCursor(Qt.CursorShape.PointingHandCursor)
 
 
-class Page(QScrollArea):
-    """Scrollable page with a large title; put groups in ``self.body``."""
+class Page(QWidget):
+    """Scrollable page with a large title; put groups in ``self.body``.
+
+    The primary action (``add_primary``) sits in a footer bar that stays pinned to the
+    bottom while the content scrolls.
+    """
 
     MAX_WIDTH = 680
 
     def __init__(self, title: str, subtitle: str = ""):
         super().__init__()
-        self.setWidgetResizable(True)
-        self.setFrameShape(QFrame.Shape.NoFrame)
-        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.viewport().setAutoFillBackground(False)
+        root = QVBoxLayout(self)
+        root.setContentsMargins(0, 0, 0, 0)
+        root.setSpacing(0)
+
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        scroll.viewport().setAutoFillBackground(False)
+        root.addWidget(scroll, 1)
+
+        self.footer = QWidget()
+        self.footer.setObjectName("pageFooter")
+        self.footer.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+        footer_lay = QHBoxLayout(self.footer)
+        footer_lay.setContentsMargins(28, 12, 28, 12)
+        self.footer_lay = footer_lay
+        self.footer.hide()
+        root.addWidget(self.footer)
 
         inner = QWidget()
         inner.setObjectName("pageInner")
@@ -62,11 +81,12 @@ class Page(QScrollArea):
             sub.setObjectName("secondary")
             sub.setWordWrap(True)
             self.body.addWidget(sub)
-        self.setWidget(inner)
+        scroll.setWidget(inner)
 
     def add_primary(self, button: QPushButton) -> None:
         style_primary(button)
-        self.body.addWidget(button, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.footer_lay.addWidget(button, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.footer.show()
         self.body.addStretch()
 
 

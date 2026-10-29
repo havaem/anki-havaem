@@ -42,6 +42,7 @@ QDialog#hub, QDialog#progress {{ background: {t['bg']}; }}
 QWidget#side {{ background: {t['side']}; }}
 QWidget#pageInner {{ background: transparent; }}
 QScrollArea {{ background: transparent; border: none; }}
+QWidget#pageFooter {{ background: {t['bg']}; border-top: 1px solid {t['sep']}; }}
 
 QLabel {{ color: {t['label']}; font-size: 13px; }}
 QLabel#pageTitle {{ font-size: 28px; font-weight: 700; }}
@@ -295,8 +296,8 @@ class Group(QWidget):
         self.footer = QLabel(footer)
         self.footer.setObjectName("groupFooter")
         self.footer.setWordWrap(True)
+        outer.addWidget(self.footer)  # parent it first: setVisible(True) on an orphan opens a window
         self.footer.setVisible(bool(footer))
-        outer.addWidget(self.footer)
         self._count = 0
 
     def add_row(self, label: str, control=None, sublabel: str = "", expand: bool = False) -> Row:
